@@ -1,0 +1,11 @@
+role_one:
+  id: 1
+  name: HR
+
+role_two: 
+  id: 2
+  name: Employee
+
+role_three:
+  id: 3
+  name: Admin

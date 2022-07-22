@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ems</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+    <% end %>
+    <%= javascript_include_tag Ckeditor.cdn_url %>
+    <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link href="assets/favicon.png" rel="icon">
+
+  <title></title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <!-- Favicons -->
+  </head>
+
+  <body>
+
+    <% if current_employee.is_admin? %>
+      <%= render 'shared/admin_header' %>
+    <% else employee_signed_in? %>
+      <%= render 'shared/header' %>
+    <% end if employee_signed_in?%>
+      <%= render 'shared/footer' %>
+    <%= yield %>
+
+  </body>
+</html>

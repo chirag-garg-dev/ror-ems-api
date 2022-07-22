@@ -1,0 +1,16 @@
+
+<div class="card-width ">
+        <div class=" recent-sales overflow-auto">
+            <div class="card-body ">
+                <div class="tab-content pt-3 pb-2 text-center">
+                    <%= image_tag  (employee.image.blank? ? "blank-profile.png" : employee.image_url), class: "size-image" %>
+                </div>
+                <div class="text-center">
+                    <div class=" m-0"><%= employee.name&.capitalize() %>
+                    </div>
+                    <div class=""><%= employee.designation.name&.capitalize() %>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div> 

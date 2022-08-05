@@ -1,14 +1,14 @@
 class TicketsController < InheritedResources::Base
   def index 
     if current_user.role.name == 'HR'
-      @tickets = Ticket.order(created_at: :desc)
+      @tickets = current_employee.tickets.order(id: :desc)
     else
       @tickets = Ticket.where(employee_id: current_employee)
     end
   end
   
   def create
-    @ticket = Ticket.new(ticket_params)
+    @ticket = current_employee.tickets.new(ticket_params)
     if @ticket.save
       redirect_to tickets_path
     else

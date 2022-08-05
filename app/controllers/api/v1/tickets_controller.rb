@@ -5,17 +5,15 @@ module Api
     class TicketsController < ApplicationController
       before_action :authenticate_employee!
       skip_before_action :verify_authenticity_token
-
       def index
-        ticket_data = current_employee.tickets
+        ticket_data = current_employee.tickets.order('created_at DESC')
         render json: {
           data: serializer_data(ticket_data, ticket_serializer),
           message: ['show tickets '], status: 200, type: 'Success'
         }
       end
-
       def create
-        ticket_data = Ticket.new(ticket_params)
+        ticket_data = current_employee.tickets.new(ticket_params)
         if ticket_data.save
           render json: {
             data: serializer_data(ticket_data, ticket_serializer),
@@ -25,13 +23,10 @@ module Api
           render json: ticket_data, status: 302, type: 'Found'
         end
       end
-
       private
-
       def ticket_params
         params.require(:ticket).permit(:status, :description, :ticket_type, :employee_id, :reason)
       end
-
       def ticket_serializer
         Api::V1::TicketSerializer
       end

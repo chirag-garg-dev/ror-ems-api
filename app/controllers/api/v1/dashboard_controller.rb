@@ -11,15 +11,13 @@ module Api
         )
         recent_join_employees = Employee.where(joining_date: (Time.now.to_date - 2.day)..Time.now.to_date)
         upcoming_holidays = Holiday.where('holiday_date > ?', Time.now.to_date).limit(5)
-
         dashboard_serializer = {}
         dashboard_serializer[:employees_birthday] = serializer_data(employees_birthday, employee_serializer)
         dashboard_serializer[:recent_join_employees] = serializer_data(recent_join_employees, employee_serializer)
         dashboard_serializer[:upcoming_holidays] = serializer_data(upcoming_holidays, holiday_serializer)
-
         render json: {
           data: dashboard_serializer,
-          message: ['Your are no dashboard Page '], status: 200, type: 'Success'
+          message: ['Your are on dashboard Page '], status: 200, type: 'Success'
         }
       end
 
